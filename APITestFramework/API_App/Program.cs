@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using Newtonsoft.Json;
 
 namespace API_App
 {
@@ -34,6 +35,8 @@ namespace API_App
             var parishCode = jsonResponse["result"]["parish"];
             Console.WriteLine($"Parish code: {parishCode}");
 
+            var singlePostCode = JsonConvert.DeserializeObject<SinglePostcodeResponse>(restResponse.Content);
+
             //var client = new RestClient("https://api.postcodes.io/postcodes/EC2Y5AS");
             //client.Timeout = -1;
             //var request = new RestRequest(Method.GET);
@@ -51,6 +54,8 @@ namespace API_App
             Console.WriteLine(response.Content);
 
             var bulkJsonResponse = JObject.Parse(response.Content);
+
+            var bulkPostcodeResponse = JsonConvert.DeserializeObject<BulkPostcodeResponse>(restResponse.Content);
         }
     }
 }
