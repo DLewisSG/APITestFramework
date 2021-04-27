@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace API_App
@@ -15,6 +16,10 @@ namespace API_App
 
         //NewtonSoft object representing the JSON response
         public JObject ResponseContent { get; set; }
+
+        
+        public SinglePostcodeResponse ResponseObject { get; set; }
+
         //the postcode used in this API request
         public string PostcodeSelected { get; set; }
         #endregion
@@ -25,7 +30,7 @@ namespace API_App
             Client = new RestClient { BaseUrl = new Uri(AppConfigReader.BaseUrl) };
         }
 
-        public void MakeRequest(string postcode)
+        public async Task MakeRequestAsync(string postcode)
         {
             // set up request
             var request = new RestRequest();
@@ -36,10 +41,13 @@ namespace API_App
             request.Resource = $"postcodes/{postcode.ToLower().Replace(" ", "")}";
 
             //make request
-           RestResponse = Client.Execute(request);
+           RestResponse = await Client.ExecuteAsync(request);
 
             // parse Json into a JObject
             ResponseContent = JObject.Parse(RestResponse.Content);
+
+            // parse response body into an object tree
+            ResponseObject = JsonConvert.DeserializeObject<SinglePostcodeResponse>(RestResponse.Content);
         }
     }
 }
