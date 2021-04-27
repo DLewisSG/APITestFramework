@@ -2,12 +2,13 @@
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace API_App
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var restClient = new RestClient("https://api.postcodes.io/");
             var restRequest = new RestRequest();
@@ -18,7 +19,7 @@ namespace API_App
             var postcode = "ML2 7BF";
             restRequest.Resource = $"postcodes/{postcode.ToLower().Replace(" ", "")}";
 
-            var restResponse = restClient.Execute(restRequest);
+            var restResponse = await restClient.ExecuteAsync(restRequest);
             Console.WriteLine("Response content (string):");
             Console.WriteLine(restResponse.Content);
 
@@ -62,6 +63,9 @@ namespace API_App
 
             var parishFromBPR = bulkPostcodeResponse.result[2].result.parish;
             Console.WriteLine($"Parish of the second postcode: {parishFromBPR}");
+
+            var postcodeFromBPR = bulkPostcodeResponse.result[0].result.postcode;
+            Console.WriteLine($"Postcode of the first object: {postcodeFromBPR}");
         }
     }
 }
