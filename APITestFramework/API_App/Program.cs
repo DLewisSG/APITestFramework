@@ -55,7 +55,13 @@ namespace API_App
 
             var bulkJsonResponse = JObject.Parse(response.Content);
 
-            var bulkPostcodeResponse = JsonConvert.DeserializeObject<BulkPostcodeResponse>(restResponse.Content);
+            var bulkPostcodeResponse = JsonConvert.DeserializeObject<BulkPostcodeResponse>(response.Content);
+
+            var adminDistrictFromBPR = bulkPostcodeResponse.result[1].result.admin_district;
+            Console.WriteLine($"Admin district of the second postcode: {adminDistrictFromBPR}");
+
+            var parishFromBPR = bulkPostcodeResponse.result[2].result.parish;
+            Console.WriteLine($"Parish of the second postcode: {parishFromBPR}");
         }
     }
 }
