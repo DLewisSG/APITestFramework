@@ -4,7 +4,7 @@ using RestSharp;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
-namespace API_App
+namespace API_App.PostcodeIOService
 {
     class Program
     {

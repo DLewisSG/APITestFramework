@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using API_App;
 using NUnit.Framework;
 using System.Threading.Tasks;
+using API_App.PostcodeIOService;
 
 namespace APITests.Tests
 {
