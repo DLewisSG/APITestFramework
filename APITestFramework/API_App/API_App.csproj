@@ -79,8 +79,11 @@
   <ItemGroup>
     <Compile Include="AppConfigReader.cs" />
     <Compile Include="Model.cs" />
+    <Compile Include="Outcode\OutcodeModel.cs" />
+    <Compile Include="Outcode\OutcodeProgram.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Outcode\SingleOutcodeService.cs" />
     <Compile Include="SinglePostcodeService.cs" />
   </ItemGroup>
   <ItemGroup>

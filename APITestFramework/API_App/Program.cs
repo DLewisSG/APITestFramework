@@ -66,6 +66,33 @@ namespace API_App
 
             var postcodeFromBPR = bulkPostcodeResponse.result[0].result.postcode;
             Console.WriteLine($"Postcode of the first object: {postcodeFromBPR}");
+
+
+
+            var restClientOC = new RestClient("https://api.postcodes.io/outcodes/");
+            var restRequestOC = new RestRequest();
+            restRequestOC.Method = Method.GET;
+            restRequestOC.AddHeader("Content-Type", "application/json");
+            restRequestOC.Timeout = -1;
+
+            var outcode = "EC2Y";
+            restRequestOC.Resource = $"outcodes/{outcode}";
+
+            var restResponseOC = await restClientOC.ExecuteAsync(restRequestOC);
+            Console.WriteLine("Response content (string):");
+            Console.WriteLine(restResponseOC.Content);
+
+            var jsonResponseOC = JObject.Parse(restResponseOC.Content);
+            Console.WriteLine("\nResponse content as a JObject");
+            Console.WriteLine(jsonResponseOC);
+
+            var longitude = jsonResponseOC["result"]["longitude"];
+            Console.WriteLine($"Longitude: {longitude}");
+
+            var country = jsonResponseOC["result"]["country"];
+            Console.WriteLine($"Country: {country}");
+
+            var singleOutCode = JsonConvert.DeserializeObject<SingleOutcodeResponse>(restResponseOC.Content);
         }
     }
 }
