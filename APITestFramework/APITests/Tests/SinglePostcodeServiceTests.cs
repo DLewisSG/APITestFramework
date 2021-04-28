@@ -39,5 +39,11 @@ namespace APITests.Tests
             var result = _singlePostcodeService.ResponseContent["result"]["postcode"].ToString();
             Assert.That(result, Is.EqualTo("EC2Y 5AS"));
         }
+
+        [Test]
+        public void NumberOfCodes_IsCorrect()
+        {
+            Assert.That(_singlePostcodeService.CodesCount(), Is.EqualTo(12));
+        }
     }
 }

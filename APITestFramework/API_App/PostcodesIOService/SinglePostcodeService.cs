@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace API_App.PostcodesIOService
@@ -36,6 +37,11 @@ namespace API_App.PostcodesIOService
 
             // parse response body into an object tree
             SinglePostcodeDTO.DeserializeResponse(PostcodeResponse);
+        }
+
+        public int CodesCount()
+        {
+            return ResponseContent["result"]["codes"].Count();
         }
     }
 }

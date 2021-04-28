@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="AppConfigReader.cs" />
     <Compile Include="PostcodesIOService\DataHandling\Model.cs" />
+    <Compile Include="PostcodesIOService\DataHandling\SingleOutcodeDTO.cs" />
     <Compile Include="PostcodesIOService\DataHandling\SinglePostcodeDTO.cs" />
     <Compile Include="PostcodesIOService\HTTPManager\CallManager.cs" />
     <Compile Include="Program.cs" />
